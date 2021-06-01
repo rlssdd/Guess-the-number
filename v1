@@ -1,0 +1,39 @@
+from random import randrange
+
+gameon = True
+chances = 5
+
+
+def guessthenumber():
+    nm = randrange(50)
+    # print(nm)
+    global gameon
+    global chances
+    while gameon:
+        userinput = input("guess a number between 1 and 50: ")
+        try:
+            userinput = int(userinput)
+            if userinput > 50:
+                print("Number out of range")
+                guessthenumber()
+                gameon = False
+                break
+            else:
+                if userinput == nm:
+                    print("You Won!")
+                elif userinput > nm:
+                    print(f"{userinput} is Too high!")
+                    chances = chances - 1
+                    print(f"you have {chances} chances left")
+                elif userinput < nm:
+                    print(f"{userinput} is Too low!")
+                    chances = chances - 1
+                    print(f"you have {chances} chances left")
+                if chances < 1:
+                    print("Game over")
+                    gameon = False
+        except ValueError:
+            print("That's not an int!")
+
+
+guessthenumber()
